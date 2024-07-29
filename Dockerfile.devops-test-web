@@ -1,0 +1,12 @@
+# required Docker >= 17.05
+FROM php:8.2-cli
+
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+COPY ./devops-test-web /var/www/devops-test-web
+
+RUN apt-get update && apt-get install -y curl nano vim 
+WORKDIR /var/www/devops-test-web
+
+RUN composer install
+
+CMD [ "php", "artisan", "serve", "--host=0.0.0.0" ]

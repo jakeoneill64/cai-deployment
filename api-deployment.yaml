@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-test-api
+spec:
+  selector:
+    matchLabels:
+      app: devops-test-api
+  template:
+    metadata:
+      labels:
+        app: devops-test-api
+    spec:
+      initContainers:
+      - name: migrate
+        image: devops-test-api
+        imagePullPolicy: IfNotPresent
+        command: ['php', 'artisan', 'migrate']
+      containers:
+      - image: devops-test-api
+        name: devops-test-api
+        imagePullPolicy: IfNotPresent
+        env:
+        ports:
+        - containerPort: 8000
+          name: devops-test-api
+        

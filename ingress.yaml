@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cai-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    # - host: web-devops-test.dev.culture.ai
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web-service
+                port:
+                  number: 80
+    # - host: api-devops-test.dev.culture.ai
+    # - http:
+    #     paths:
+    #       - path: /
+    #         pathType: Prefix
+    #         backend:
+    #           service:
+    #             name: api-service
+    #             port:
+    #               number: 80

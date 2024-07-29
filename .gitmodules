@@ -1,0 +1,7 @@
+[submodule "devops-test-web"]
+	path = devops-test-web
+	url = git@github.com:cultureai/devops-test-web.git
+	
+[submodule "devops-test-api"]
+	path = devops-test-api
+	url = git@github.com:cultureai/devops-test-api.git

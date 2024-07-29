@@ -1,0 +1,11 @@
+# required Docker >= 17.05
+FROM php:8.2-cli
+
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+COPY ./devops-test-api /var/www/devops-test-api
+
+WORKDIR /var/www/devops-test-api
+
+RUN composer install
+
+CMD [ "php", "artisan", "serve" ]
