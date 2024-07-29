@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: devops-test-api
+  namespace: cai
 spec:
   selector:
     matchLabels:
@@ -20,7 +21,6 @@ spec:
       - image: devops-test-api
         name: devops-test-api
         imagePullPolicy: IfNotPresent
-        env:
         ports:
         - containerPort: 8000
           name: devops-test-api

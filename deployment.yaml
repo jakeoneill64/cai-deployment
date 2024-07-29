@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: devops-test-web
+  namespace: cai
 spec:
   selector:
     matchLabels:
@@ -23,6 +24,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: redis
+  namespace: cai
   labels:
     app: redis
 spec:
@@ -44,6 +46,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: mysql
+  namespace: cai
 spec:
   selector:
     matchLabels:
@@ -62,7 +65,7 @@ spec:
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: my-secret
+              name: cai-secrets
               key: root-password
         - name: MYSQL_DATABASE
           value: test
