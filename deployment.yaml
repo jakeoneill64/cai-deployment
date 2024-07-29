@@ -12,7 +12,7 @@ spec:
         app: devops-test-web
     spec:
       containers:
-      - image: devops-test-web
+      - image: devops-test-web:latest
         name: devops-test-web
         imagePullPolicy: IfNotPresent
         ports:
@@ -64,16 +64,8 @@ spec:
             secretKeyRef:
               name: my-secret
               key: root-password
-        - name: MYSQL_USER
-          valueFrom:
-            secretKeyRef:
-              name: my-secret
-              key: username
-        - name: MYSQL_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: my-secret
-              key: user-password
+        - name: MYSQL_DATABASE
+          value: test
         ports:
         - containerPort: 3306
           name: mysql

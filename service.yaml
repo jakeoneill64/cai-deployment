@@ -25,19 +25,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: web-service
-  labels:
-    app: web-service
-spec:
-  ports:
-  - port: 80
-    targetPort: 8000
-  selector:
-    app: devops-test-web
----
-apiVersion: v1
-kind: Service
-metadata:
   name: redis-service
   labels:
     app: redis-service
@@ -46,3 +33,15 @@ spec:
   - port: 6379
   selector:
     app: redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: devops-test-web
+  ports:
+    - port: 80
+      targetPort: 8000
