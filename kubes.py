@@ -207,7 +207,7 @@ def forward(core_client):
 
     logger.info(f'forwarding port on {pod_list[0]}')
     subprocess.run(
-        ['sudo', '-E', 'kubectl', 'port-forward', '--address','0.0.0.0 ', pod_list[0], ' 80:8000', '-n', 'cai']
+        ['sudo', '-E', 'kubectl', 'port-forward', '--address','0.0.0.0 ', pod_list[0], '80:8000', '-n', 'cai']
     )
 
 def configure_submodules():
