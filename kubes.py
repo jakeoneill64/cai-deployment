@@ -205,6 +205,7 @@ def forward(core_client):
         logger.error('could not find any web service pods')
         return
 
+    logger.info(f'forwarding port on {pod_list}')
     subprocess.run(
         ['sudo', '-E', 'kubectl', 'port-forward', '--address','0.0.0.0', pod_list[0], '80:8000', '-n', 'cai']
     )
@@ -229,7 +230,6 @@ if __name__ == '__main__':
     console_handler = logging.StreamHandler()
     console_handler.setLevel('INFO')
     logger.addHandler(console_handler)
-    logger.info(os.environ)
 
     args = set(map(lambda arg: arg.lower(), sys.argv[1:]))
 
