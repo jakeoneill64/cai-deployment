@@ -50,10 +50,5 @@ sudo apt install -y python3.12-venv
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-python3 kubes.py clean deploy
-
-
-export pod_name=$(sudo -u ubuntu kubectl get pods -n cai -l app=devops-test-web -o jsonpath='{.items[0].metadata.name}')
-echo "exposing web service pod: $pod_name"
-sudo -E kubectl port-forward --address 0.0.0.0 "$pod_name" 80:8000 -n cai
+python3 kubes.py clean deploy forward
 EOF

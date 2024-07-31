@@ -195,7 +195,19 @@ def deploy(
     _process_resource_file(app_client, core_client, './api-deployment.yaml')
     _process_resource_file(app_client, core_client, './service.yaml')
 
+def forward(core_client):
 
+    pod_list = [
+            item.metadata.name for item in core_client.list_namespaced_pod('cai', label_selector='app=mysql').items
+    ]
+
+    if not len(pod_list) >= 1:
+        logger.error('could not find any web service pods')
+        return
+
+    subprocess.run(
+        ['sudo', '-E', 'kubectl', 'port-forward', '--address','0.0.0.0', pod_list[0], '80:8000', '-n', 'cai']
+    )
 
 def configure_submodules():
     subprocess.run(['git', 'submodule', 'init'])
@@ -226,3 +238,6 @@ if __name__ == '__main__':
 
     if 'deploy' in args:
         deploy(app_client, core_client)
+
+    if 'forward' in args:
+        forward(core_client)
