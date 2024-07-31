@@ -198,16 +198,16 @@ def deploy(
 def forward(core_client):
 
     pod_list = [
-            item.metadata.name for item in core_client.list_namespaced_pod('cai', label_selector='app=mysql').items
+            item.metadata.name for item in core_client.list_namespaced_pod('cai', label_selector='app=devops-test-web').items
     ]
 
     if not len(pod_list) >= 1:
         logger.error('could not find any web service pods')
         return
 
-    logger.info(f'forwarding port on {pod_list}')
+    logger.info(f'forwarding port on {pod_list[0]}')
     subprocess.run(
-        ['sudo', '-E', 'kubectl', 'port-forward', '--address','0.0.0.0', pod_list[0], '80:8000', '-n', 'cai']
+        ['sudo', '-E', 'kubectl', 'port-forward', '--address','0.0.0.0 ', pod_list[0], ' 80:8000', '-n', 'cai']
     )
 
 def configure_submodules():
